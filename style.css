@@ -1,0 +1,382 @@
+/* ========================================
+   Madison & Monroe, LLC
+   Strategic Advisory  Single-page site
+   ======================================== */
+
+:root {
+  --ink: #14181f;
+  --ink-soft: #2a2f3a;
+  --paper: #f7f4ee;
+  --paper-deep: #efeae0;
+  --rule: #d8d2c4;
+  --muted: #6b7280;
+  --accent: #8a6d3b;       /* muted brass */
+  --accent-deep: #6a5326;
+  --max: 720px;
+}
+
+* , *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; }
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(247, 244, 238, 0.94);
+  backdrop-filter: saturate(180%) blur(8px);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wordmark {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.wordmark span {
+  color: var(--accent);
+  font-style: italic;
+}
+nav ul {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+nav ul a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-soft);
+  transition: color 0.2s;
+}
+nav ul a:hover { color: var(--accent); }
+
+/* ============ LAYOUT ============ */
+main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 140px 32px 0;
+}
+
+section {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--rule);
+}
+section:last-of-type { border-bottom: none; }
+
+/* ============ EYEBROW ============ */
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+/* ============ HERO ============ */
+.hero { padding-top: 24px; padding-bottom: 96px; }
+.hero h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(38px, 6.2vw, 60px);
+  line-height: 1.08;
+  letter-spacing: -1px;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero .lede {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+.hero p {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  max-width: 620px;
+}
+
+/* ============ SECTION TITLES ============ */
+.section-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(28px, 3.6vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.section-intro {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+/* ============ PRACTICE PILLARS ============ */
+.pillars {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 16px;
+}
+.pillar {
+  padding: 32px 0;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 24px;
+}
+.pillar:last-child { border-bottom: 1px solid var(--rule); }
+.pillar-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  padding-top: 6px;
+  letter-spacing: 1px;
+}
+.pillar h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.25;
+  margin-bottom: 10px;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+}
+.pillar p {
+  font-size: 15.5px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* ============ APPROACH ============ */
+.approach p {
+  font-size: 16.5px;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  line-height: 1.8;
+  max-width: 620px;
+}
+
+/* ============ PRINCIPAL ============ */
+.principal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.principal-body p {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  line-height: 1.75;
+}
+.principal-body a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.principal-body a:hover { border-bottom-color: var(--accent); }
+.credentials {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+.credentials-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.credentials ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.credentials li {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 10px;
+  align-items: baseline;
+}
+.credentials li::before {
+  content: "–";
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============ SECTORS ============ */
+.sectors {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 32px;
+  margin-top: 8px;
+}
+.sector {
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+.sector h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+.sector p {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ============ CONTACT ============ */
+.contact-block {
+  text-align: left;
+  padding-top: 16px;
+}
+.contact-block p {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 560px;
+  margin-bottom: 32px;
+}
+.contact-email {
+  display: inline-block;
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 26px;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 4px;
+  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: -0.3px;
+}
+.contact-email:hover {
+  color: var(--accent-deep);
+  border-bottom-color: var(--accent-deep);
+}
+.contact-meta {
+  margin-top: 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+}
+.contact-meta a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-meta a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ============ FOOTER ============ */
+footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 40px 32px 56px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 700px) {
+  .nav-inner { padding: 0 20px; }
+  nav ul { gap: 14px; }
+  nav ul a { font-size: 10.5px; letter-spacing: 0.6px; }
+  main { padding: 110px 22px 0; }
+  section { padding: 60px 0; }
+  .hero { padding-bottom: 64px; }
+  .hero .lede { font-size: 19px; }
+  .pillar { grid-template-columns: 1fr; gap: 8px; }
+  .pillar-num { padding-top: 0; }
+  .sectors { grid-template-columns: 1fr; }
+  .contact-email { font-size: 22px; }
+  footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 20px 40px; }
+}
+
+/* ============ MICRO-INTERACTIONS ============ */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero h1, .hero .lede, .hero p {
+  animation: rise 0.7s ease-out backwards;
+}
+.hero h1 { animation-delay: 0.05s; }
+.hero .lede { animation-delay: 0.2s; }
+.hero p:nth-of-type(1) { animation-delay: 0.32s; }
+.hero p:nth-of-type(2) { animation-delay: 0.42s; }
