@@ -770,3 +770,28 @@ details[open] summary { margin-bottom:8px; }
  .founder-copy h3 { font-size:28px; }
  .services article { scroll-margin-top:24px; }
 }
+
+/* Dedicated service pages retain the homepage's type and color system. */
+.service-page-link { display:inline-block; margin-top:14px; font-size:12px; line-height:1.6; }
+.service-hero { background:var(--navy); color:var(--paper); padding:32px 0 64px; }
+.service-hero h1 { max-width:900px; font-size:clamp(38px,5vw,64px); }
+.service-hero .eyebrow { color:var(--gold); }
+.service-hero .lede { max-width:780px; margin-bottom:28px; }
+.breadcrumbs { font-size:12px; margin-bottom:42px; color:#c4d0d5; }
+.service-layout { display:grid; grid-template-columns:1.7fr 1fr; gap:70px; align-items:start; }
+.service-layout h2 { font-size:38px; margin-bottom:24px; }
+.service-layout h3 { margin-top:30px; }
+.service-layout p,.service-layout li { font-size:16px; color:var(--muted); }
+.service-layout li { margin-block:12px; }
+.service-layout ul { padding-left:22px; }
+.service-aside { padding:28px; border-top:2px solid var(--brass); background:var(--cream); }
+.service-aside h3 { margin:0 0 18px; }
+.service-aside a { display:inline-block; margin-top:20px; font-size:14px; }
+.service-detail .engagements { margin-top:38px; }
+.service-faq { padding-bottom:70px; }
+.service-faq h2 { margin-bottom:25px; }
+.service-faq details { border-top:1px solid var(--line); max-width:850px; padding-block:8px; }
+.service-faq summary { font-size:17px; }
+.service-faq details p { padding-bottom:20px; color:var(--muted); }
+.related-services { display:flex; flex-wrap:wrap; gap:18px 28px; padding-block:28px; font-size:13px; border-bottom:1px solid var(--line); }
+@media(max-width:760px) { .service-layout { grid-template-columns:1fr; gap:32px; } .service-layout h2 { font-size:32px; } .service-aside { padding:24px; } .breadcrumbs { margin-bottom:28px; } }
