@@ -795,3 +795,12 @@ details[open] summary { margin-bottom:8px; }
 .service-faq details p { padding-bottom:20px; color:var(--muted); }
 .related-services { display:flex; flex-wrap:wrap; gap:18px 28px; padding-block:28px; font-size:13px; border-bottom:1px solid var(--line); }
 @media(max-width:760px) { .service-layout { grid-template-columns:1fr; gap:32px; } .service-layout h2 { font-size:32px; } .service-aside { padding:24px; } .breadcrumbs { margin-bottom:28px; } }
+
+/* Publication and conference credentials remain visible without expanding the bio. */
+.research h2 { max-width:760px; margin-bottom:36px; }
+.research-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+.research-grid article { border-top:2px solid var(--brass); padding-top:24px; }
+.research-grid h3 { font-size:28px; line-height:1.2; margin-bottom:18px; }
+.research-grid p:not(.eyebrow) { color:var(--muted); font-size:16px; }
+.research-grid .text-link { margin-top:20px; }
+@media(max-width:760px) { .research-grid { grid-template-columns:1fr; gap:36px; } }
