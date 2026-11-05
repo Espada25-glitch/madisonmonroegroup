@@ -804,3 +804,8 @@ details[open] summary { margin-bottom:8px; }
 .research-grid p:not(.eyebrow) { color:var(--muted); font-size:16px; }
 .research-grid .text-link { margin-top:20px; }
 @media(max-width:760px) { .research-grid { grid-template-columns:1fr; gap:36px; } }
+
+/* Give the embedded consultation form a readable surface at every screen size. */
+.consultation-form { background:#fff; color:var(--ink); padding:24px; border-radius:4px; min-width:0; }
+.contact-grid > div { min-width:0; }
+@media(max-width:760px) { .consultation-form { padding:16px; } }
