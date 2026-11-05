@@ -836,3 +836,12 @@ details[open] summary { margin-bottom:8px; }
   .positioning-grid { grid-template-columns:1fr; gap:24px; }
   .positioning h2 { padding-left:18px; }
 }
+
+/* Editorial perspective pages */
+.perspective-hero h1 { max-width:960px; }
+.perspective-byline { margin-top:28px; color:var(--gold); font-size:15px; }
+.perspective-body { max-width:760px; padding-block:64px; font-size:18px; line-height:1.85; }
+.perspective-body p+p { margin-top:26px; }
+.perspective-body strong { color:var(--navy); }
+.perspective-back { margin-top:44px; padding-top:24px; border-top:1px solid var(--line); font-size:15px; }
+@media(max-width:600px) { .perspective-body { padding-block:40px; font-size:17px; } }
