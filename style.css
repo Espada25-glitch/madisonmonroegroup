@@ -809,3 +809,30 @@ details[open] summary { margin-bottom:8px; }
 .consultation-form { background:#fff; color:var(--ink); padding:24px; border-radius:4px; min-width:0; }
 .contact-grid > div { min-width:0; }
 @media(max-width:760px) { .consultation-form { padding:16px; } }
+
+/* Homepage positioning strip */
+.positioning {
+  background:var(--cream);
+  border-bottom:1px solid var(--line);
+  padding-block:52px;
+}
+.positioning-grid {
+  display:grid;
+  grid-template-columns:1.15fr 1fr;
+  align-items:center;
+  gap:64px;
+}
+.positioning h2 {
+  border-left:3px solid var(--gold);
+  padding-left:24px;
+  font-size:clamp(26px,2.5vw,36px);
+  line-height:1.25;
+  letter-spacing:-.6px;
+}
+.positioning h2 em { color:var(--navy); }
+.positioning p { color:var(--muted); max-width:560px; }
+@media (max-width:760px) {
+  .positioning { padding-block:36px; }
+  .positioning-grid { grid-template-columns:1fr; gap:24px; }
+  .positioning h2 { padding-left:18px; }
+}
