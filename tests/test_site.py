@@ -52,12 +52,26 @@ class SiteTests(unittest.TestCase):
      if node.get('@type')=='Service':
       self.assertTrue(node['description']);self.assertEqual(node['provider']['@id'],BASE+'#organization')
   home=self.pages[ROOT/'index.html'];nodes=home.schemas[0]['@graph']
-  self.assertEqual(sum(n['@type']=='Service' for n in nodes),6)
-  self.assertEqual(len(list((ROOT/'services').glob('*/index.html'))),6)
+  self.assertEqual(sum(n['@type']=='Service' for n in nodes),7)
+  self.assertEqual(len(list((ROOT/'services').glob('*/index.html'))),7)
  def test_sitemap_and_robots(self):
   urls={n.text for n in ET.parse(ROOT/'sitemap.xml').iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
   self.assertEqual(urls,{BASE+str(p.relative_to(ROOT)).replace('index.html','') for p in self.pages})
   self.assertIn('Sitemap: '+BASE+'sitemap.xml',(ROOT/'robots.txt').read_text())
+ def test_release_schema_and_discovery(self):
+  for route,kind in [('services/marketing-strategy','Service'),('services/growth-strategy','Service'),('research','CollectionPage')]:
+   path=ROOT/route/'index.html';p=self.pages[path];nodes=p.schemas[0]['@graph']
+   self.assertTrue(any(n['@type']==kind for n in nodes))
+   breadcrumbs=next(n for n in nodes if n['@type']=='BreadcrumbList')
+   self.assertEqual(breadcrumbs['itemListElement'][-1]['item'],BASE+route+'/')
+   for other in self.pages.values():
+    self.assertTrue(any(t=='a' and a.get('href')=='/'+route+'/' for t,a in other.tags))
+  research=self.pages[ROOT/'research/index.html'].schemas[0]['@graph']
+  article=next(n for n in research if n['@type']=='Article')
+  self.assertEqual(article['publisher']['name'],'Harvard Business Review')
+  self.assertEqual(len(article['author']),3)
+  self.assertEqual(article['datePublished'],'2026-06-29')
+  self.assertFalse(any(a.get('name')=='robots' and 'noindex' in a.get('content','') for p in self.pages.values() for t,a in p.tags))
  def test_first_party_size_budget(self):
   self.assertLess((ROOT/'style.css').stat().st_size,30000)
   for p in self.pages:self.assertLess(p.stat().st_size,40000)
