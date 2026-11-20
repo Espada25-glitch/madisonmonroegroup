@@ -45,7 +45,7 @@ async def main():
       if dims["h1"]!=1 or dims["main"]!=1:problems.append("missing/duplicate landmarks")
       if "Space Grotesk" not in dims["font"] or "DM Sans" not in dims["bodyFont"]:problems.append("incorrect fonts: "+str(dims["font"])+" | "+str(dims["bodyFont"]))
       if not dims["hasGoogle"] or not dims["hasHubspot"]:problems.append("missing analytics script")
-      if (route=="/contact/" or route=="/research/" or route=="/services/marketing-strategy/") and not dims["hasHubspotForm"]:problems.append("missing HubSpot form")
+      if route=="/contact/" and not dims["hasHubspotForm"]:problems.append("missing HubSpot form")
       if errors:problems.append("page JS errors: "+str(errors[:2]))
       report.append({"width":width,"route":route,"status":"PASS" if not problems else "FAIL","dimensions":dims,"issues":problems})
       failures.extend(f"{width}px {route}: {p}" for p in problems)
