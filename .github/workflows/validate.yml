@@ -27,6 +27,8 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Check responsive pages and screenshots
         run: python tests/browser_check.py
+      - name: Probe GA4 and HubSpot without sending a lead
+        run: python tests/tracking_probe.py
       - name: Upload visual evidence
         if: always()
         uses: actions/upload-artifact@v4
