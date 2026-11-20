@@ -50,6 +50,12 @@ async def main():
       report.append({"width":width,"route":route,"status":"PASS" if not problems else "FAIL","dimensions":dims,"issues":problems})
       failures.extend(f"{width}px {route}: {p}" for p in problems)
       if width in [375,1440]:
+       if dims["hasHubspotForm"]:
+        try:
+         await page.locator('iframe[src*="hsforms"]').first.wait_for(state="attached",timeout=11000)
+         await page.wait_for_timeout(2200)
+        except Exception:
+         pass
        name=route.strip("/").replace("/","-") or "home"
        await page.screenshot(path=str(out/f"{name}-{width}.png"),full_page=True)
      if width==1440:
