@@ -41,3 +41,20 @@
 .legacy-page .footer{background:var(--green-deep);color:white}
 @media(max-width:900px){.legacy-page .engagements,.legacy-page .research-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.legacy-page .service-layout{grid-template-columns:1fr}.legacy-page .service-hero::before{right:-22%}}
 @media(max-width:700px){.legacy-page .section{padding:48px 0}.legacy-page .section.wrap{width:calc(100% - 36px)}.legacy-page .engagements,.legacy-page .research-grid{grid-template-columns:1fr}.legacy-page .service-hero,.legacy-page .perspective-hero{padding:52px 0 62px}.legacy-page .service-hero::before{right:-52%;top:-100px;width:100vw;height:100vw;opacity:.14}.legacy-page .service-hero::after{opacity:.15}.legacy-page .perspective-body{padding:45px 0}.legacy-page .related-services{display:block}.legacy-page .related-services a{display:inline-block;margin:7px 12px 7px 0}}
+
+/* Migrated contact and article elements retain original HubSpot embeds. */
+.legacy-page .contact{padding:70px 0;background:var(--green-deep);color:#fff}
+.legacy-page .contact h2,.legacy-page .contact .eyebrow{color:#fff}
+.legacy-page .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+.legacy-page .contact .email{display:block;margin-top:16px;color:#fff;font-weight:700}
+.legacy-page .contact .text-link{color:#fff;border-bottom-color:#fff}
+.legacy-page .contact-action{min-width:0}
+.legacy-page .contact-action>p{margin-top:18px}
+.legacy-page .consultation-form{padding:22px;background:var(--paper);color:var(--ink);min-height:350px;border-radius:2px}
+.legacy-page .consultation-form .hs-form-frame{min-height:300px}
+.legacy-page .perspective-body ul,.legacy-page .section ul{padding-left:24px}
+.legacy-page .perspective-body li,.legacy-page .section li{margin:.45em 0}
+.legacy-page .service-faq{width:calc(100% - 64px);max-width:var(--max);margin:auto}
+.legacy-page .service-layout .service-aside h3{font-size:1.5rem}
+.legacy-page .related-services{width:calc(100% - 64px);max-width:var(--max);margin:auto}
+@media(max-width:700px){.legacy-page .contact-grid{grid-template-columns:1fr;gap:24px}.legacy-page .service-faq,.legacy-page .related-services{width:calc(100% - 36px)}}
