@@ -22,6 +22,7 @@ async def main():
       errors=[];page.on("pageerror",lambda exc,errors=errors:errors.append(str(exc)))
       response=await page.goto(f"http://127.0.0.1:{PORT}{route}",wait_until="domcontentloaded",timeout=30000)
       await page.locator("h1").wait_for()
+      await page.wait_for_function('() => !!document.querySelector("link[href=/concept-b.css]")?.sheet', timeout=15000)
       await page.evaluate("document.fonts.ready")
       dims=await page.evaluate("""() => ({
         scroll: document.documentElement.scrollWidth,
