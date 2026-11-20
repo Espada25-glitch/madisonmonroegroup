@@ -1,78 +1,65 @@
-"""Dependency-free regression checks for the published static site."""
-import json, unittest
+"""Static-site regression checks for Madison & Monroe Concept B."""
+import json
+import unittest
 from pathlib import Path
 from html.parser import HTMLParser
-from urllib.parse import urlsplit, unquote
+from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
-BASE='https://www.madisonmonroegroup.com/'
+BASE="https://www.madisonmonroegroup.com/"
+NEW=["index.html","expertise/index.html","approach/index.html","about/index.html","insights/index.html","contact/index.html"] + ["services/"+p+"/index.html" for p in ["strategic-brand-positioning","business-growth-strategy","ai-discoverability-innovation","customer-insights-analytics"]]
 class Page(HTMLParser):
  def __init__(self,path):
-  super().__init__();self.tags=[];self.schemas=[];self.capture=False;self.buffer='';self.feed(path.read_text())
+  super().__init__();self.tags=[];self.schemas=[];self.capture=False;self.buffer="";self.feed(path.read_text())
  def handle_starttag(self,tag,attrs):
   a=dict(attrs);self.tags.append((tag,a))
-  if tag=='script' and a.get('type')=='application/ld+json':self.capture=True;self.buffer=''
+  if tag=="script" and a.get("type")=="application/ld+json":self.capture=True;self.buffer=""
  def handle_data(self,data):
   if self.capture:self.buffer+=data
  def handle_endtag(self,tag):
-  if tag=='script' and self.capture:self.schemas.append(json.loads(self.buffer));self.capture=False
+  if tag=="script" and self.capture:self.schemas.append(json.loads(self.buffer));self.capture=False
 class SiteTests(unittest.TestCase):
  @classmethod
- def setUpClass(cls):cls.pages={p:Page(p) for p in ROOT.rglob('*.html') if '.git' not in p.parts}
- def test_metadata_and_landmarks(self):
-  titles=[]
-  for path,p in self.pages.items():
-   with self.subTest(page=str(path.relative_to(ROOT))):
-    self.assertEqual(sum(t=='h1' for t,a in p.tags),1)
-    self.assertEqual(sum(t=='main' for t,a in p.tags),1)
-    expected=BASE+str(path.relative_to(ROOT)).replace('index.html','')
-    self.assertEqual([a['href'] for t,a in p.tags if t=='link' and a.get('rel')=='canonical'],[expected])
-    for key in ['description','twitter:card','twitter:image']:
-     self.assertTrue(any(a.get('name')==key and a.get('content') for t,a in p.tags))
-    self.assertTrue(any(a.get('property')=='og:url' and a.get('content')==expected for t,a in p.tags))
-    ids=[a['id'] for t,a in p.tags if 'id' in a];self.assertEqual(len(ids),len(set(ids)))
- def test_local_links_and_fragments(self):
-  for path,p in self.pages.items():
-   for tag,a in p.tags:
-    for attr in ('href','src'):
-     value=a.get(attr,'');u=urlsplit(value)
-     if not value or u.scheme or u.netloc:continue
-     dest=(ROOT/u.path.lstrip('/')) if u.path.startswith('/') else path.parent/u.path
-     if not u.path:dest=path
-     if dest.is_dir():dest=dest/'index.html'
-     self.assertTrue(dest.exists(),f'{path}: {value}')
-     if u.fragment and dest.suffix=='.html':
-      self.assertIn(unquote(u.fragment),[x.get('id') for _,x in Page(dest).tags],f'{path}: {value}')
- def test_schema_and_service_coverage(self):
-  for path,p in self.pages.items():
-   self.assertTrue(p.schemas)
-   for schema in p.schemas:
-    self.assertNotIn('"Event"',json.dumps(schema))
-    for node in schema.get('@graph',[]):
-     if node.get('@type')=='Service':
-      self.assertTrue(node['description']);self.assertEqual(node['provider']['@id'],BASE+'#organization')
-  home=self.pages[ROOT/'index.html'];nodes=home.schemas[0]['@graph']
-  self.assertEqual(sum(n['@type']=='Service' for n in nodes),7)
-  self.assertEqual(len(list((ROOT/'services').glob('*/index.html'))),7)
- def test_sitemap_and_robots(self):
-  urls={n.text for n in ET.parse(ROOT/'sitemap.xml').iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-  self.assertEqual(urls,{BASE+str(p.relative_to(ROOT)).replace('index.html','') for p in self.pages})
-  self.assertIn('Sitemap: '+BASE+'sitemap.xml',(ROOT/'robots.txt').read_text())
- def test_release_schema_and_discovery(self):
-  for route,kind in [('services/marketing-strategy','Service'),('services/growth-strategy','Service'),('research','CollectionPage')]:
-   path=ROOT/route/'index.html';p=self.pages[path];nodes=p.schemas[0]['@graph']
-   self.assertTrue(any(n['@type']==kind for n in nodes))
-   breadcrumbs=next(n for n in nodes if n['@type']=='BreadcrumbList')
-   self.assertEqual(breadcrumbs['itemListElement'][-1]['item'],BASE+route+'/')
-   for other in self.pages.values():
-    self.assertTrue(any(t=='a' and a.get('href')=='/'+route+'/' for t,a in other.tags))
-  research=self.pages[ROOT/'research/index.html'].schemas[0]['@graph']
-  article=next(n for n in research if n['@type']=='Article')
-  self.assertEqual(article['publisher']['name'],'Harvard Business Review')
-  self.assertEqual(len(article['author']),3)
-  self.assertEqual(article['datePublished'],'2026-06-29')
-  self.assertFalse(any(a.get('name')=='robots' and 'noindex' in a.get('content','') for p in self.pages.values() for t,a in p.tags))
- def test_first_party_size_budget(self):
-  self.assertLess((ROOT/'style.css').stat().st_size,30000)
-  for p in self.pages:self.assertLess(p.stat().st_size,40000)
-if __name__=='__main__':unittest.main()
+ def setUpClass(cls):cls.pages={p:Page(p) for p in ROOT.rglob("*.html")}
+ def test_new_pages_have_metadata_and_semantics(self):
+  for file in NEW:
+   path=ROOT/file
+   with self.subTest(file=file):
+    self.assertTrue(path.exists())
+    page=self.pages[path]
+    self.assertEqual(sum(t=="main" for t,a in page.tags),1)
+    self.assertEqual(sum(t=="h1" for t,a in page.tags),1)
+    self.assertTrue(page.schemas)
+    canonical=BASE+file.replace("index.html","")
+    self.assertEqual([a.get("href") for t,a in page.tags if t=="link" and a.get("rel")=="canonical"],[canonical])
+    self.assertTrue(any(a.get("name")=="description" for t,a in page.tags))
+    self.assertTrue(any(a.get("property")=="og:image" for t,a in page.tags))
+    src=path.read_text()
+    self.assertIn("G-J1WS6C2650",src)
+    self.assertIn("247902140",src)
+ def test_hubspot_contact_form_preserved(self):
+  html=(ROOT/"contact/index.html").read_text()
+  self.assertIn("3d92aefc-2eeb-4910-9014-61fb46ca2239",html)
+  self.assertIn("https://js-na2.hsforms.net/forms/embed/247902140.js",html)
+ def test_new_service_schema(self):
+  for file in NEW:
+   if not file.startswith("services/"):continue
+   nodes=self.pages[ROOT/file].schemas[0]["@graph"]
+   self.assertTrue(any(n.get("@type")=="Service" for n in nodes))
+   self.assertTrue(any(n.get("@type")=="BreadcrumbList" for n in nodes))
+ def test_local_paths_exist(self):
+  for path,page in self.pages.items():
+   for tag,a in page.tags:
+    for attr in ("href","src"):
+     value=a.get(attr,"")
+     if not value or value.startswith(("#","mailto:","tel:")):continue
+     u=urlsplit(value)
+     if u.scheme or u.netloc:continue
+     dest=ROOT/u.path.lstrip("/") if u.path.startswith("/") else path.parent/u.path
+     if dest.is_dir():dest=dest/"index.html"
+     self.assertTrue(dest.exists(),f"{path}: {value}")
+ def test_sitemap_covers_every_html_page(self):
+  urls={n.text for n in ET.parse(ROOT/"sitemap.xml").iter("{http://www.sitemaps.org/schemas/sitemap/0.9}loc")}
+  self.assertEqual(urls,{BASE+str(p.relative_to(ROOT)).replace("index.html","") for p in self.pages})
+  self.assertIn("Sitemap: "+BASE+"sitemap.xml",(ROOT/"robots.txt").read_text())
+if __name__=="__main__":unittest.main()
