@@ -58,3 +58,14 @@
 .legacy-page .service-layout .service-aside h3{font-size:1.5rem}
 .legacy-page .related-services{width:calc(100% - 64px);max-width:var(--max);margin:auto}
 @media(max-width:700px){.legacy-page .contact-grid{grid-template-columns:1fr;gap:24px}.legacy-page .service-faq,.legacy-page .related-services{width:calc(100% - 36px)}}
+
+/* Keep artwork in its own visual field rather than behind long titles. */
+@media(min-width:701px){
+.legacy-page .service-hero h1,.legacy-page .perspective-hero h1{max-width:56%}
+.legacy-page .service-hero .lede,.legacy-page .perspective-hero .lede{max-width:56%}
+.legacy-page .service-hero::before,.legacy-page .perspective-hero::before{right:-14%;opacity:.88}
+}
+@media(max-width:700px){
+.legacy-page .service-hero h1,.legacy-page .perspective-hero h1{max-width:100%}
+.legacy-page .service-hero .lede,.legacy-page .perspective-hero .lede{max-width:100%}
+}
