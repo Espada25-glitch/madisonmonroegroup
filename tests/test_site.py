@@ -52,12 +52,19 @@ class SiteTests(unittest.TestCase):
    for tag,a in page.tags:
     for attr in ("href","src"):
      value=a.get(attr,"")
-     if not value or value.startswith(("#","mailto:","tel:")):continue
+     if not value or value.startswith(("mailto:","tel:")):continue
      u=urlsplit(value)
      if u.scheme or u.netloc:continue
-     dest=ROOT/u.path.lstrip("/") if u.path.startswith("/") else path.parent/u.path
+     if value.startswith("#"):dest=path
+     else:dest=ROOT/u.path.lstrip("/") if u.path.startswith("/") else path.parent/u.path
      if dest.is_dir():dest=dest/"index.html"
      self.assertTrue(dest.exists(),f"{path}: {value}")
+     if u.fragment and dest.suffix==".html":
+      target=self.pages.get(dest)
+      if target is None:target=Page(dest)
+      self.assertIn(u.fragment,[a.get("id") for t,a in target.tags],f"{path}: invalid fragment {value}")
+     continue
+
  def test_sitemap_covers_every_html_page(self):
   urls={n.text for n in ET.parse(ROOT/"sitemap.xml").iter("{http://www.sitemaps.org/schemas/sitemap/0.9}loc")}
   self.assertEqual(urls,{BASE+str(p.relative_to(ROOT)).replace("index.html","") for p in self.pages})
