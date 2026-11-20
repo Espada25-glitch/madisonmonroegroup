@@ -1,0 +1,71 @@
+/* Concept B legacy-page bridge: preserve published substantive copy and search URLs. */
+.legacy-page{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink)}
+.legacy-page .header{position:sticky;top:0;background:var(--paper);color:var(--ink);border-bottom:1px solid var(--line);z-index:20}
+.legacy-page .header-in{min-height:78px}
+.legacy-page .nav{min-height:0}
+.legacy-page .header .logo{color:var(--green)}
+.legacy-page .service-hero,.legacy-page .perspective-hero{position:relative;background:linear-gradient(110deg,#fbf9f3 0%,#f0ede3 100%);color:var(--ink);padding:78px 0 84px;overflow:hidden}
+.legacy-page .service-hero::before,.legacy-page .perspective-hero::before{content:'';position:absolute;right:-10%;top:-110px;width:42vw;height:42vw;max-width:600px;max-height:600px;border:clamp(42px,8vw,90px) solid var(--green);border-radius:50%;opacity:.96;pointer-events:none}
+.legacy-page .service-hero::after,.legacy-page .perspective-hero::after{content:'';position:absolute;right:8%;bottom:-120px;width:25vw;height:25vw;max-width:360px;max-height:360px;border-radius:50%;background:var(--sage);opacity:.55;pointer-events:none}
+.legacy-page .service-hero>.wrap{position:relative;z-index:1}
+.legacy-page .service-hero h1,.legacy-page .perspective-hero h1{font:600 clamp(2.5rem,4.5vw,4.8rem)/1.1 'Space Grotesk',sans-serif;letter-spacing:-.04em;max-width:800px;color:var(--green-deep)}
+.legacy-page .service-hero .lede{font:400 clamp(1.05rem,1.5vw,1.3rem)/1.55 'DM Sans',sans-serif;max-width:730px;color:var(--ink)}
+.legacy-page .service-hero .eyebrow{color:var(--bronze)}
+.legacy-page .breadcrumbs,.legacy-page .breadcrumbs a{color:var(--bronze);font-size:.79rem}
+.legacy-page .section{padding:75px 0}
+.legacy-page .section.wrap{width:calc(100% - 64px);max-width:var(--max)}
+.legacy-page .section h2,.legacy-page .service-faq h2{font:600 clamp(2rem,3.3vw,3.15rem)/1.18 'Space Grotesk',sans-serif;letter-spacing:-.04em;color:var(--green-deep)}
+.legacy-page h3{font:600 clamp(1.3rem,2vw,1.9rem)/1.2 'Space Grotesk',sans-serif;letter-spacing:-.025em}
+.legacy-page .section .eyebrow{color:var(--bronze)}
+.legacy-page .section p,.legacy-page .perspective-body p{font-size:1rem;line-height:1.7}
+.legacy-page .engagements,.legacy-page .research-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.legacy-page .engagements article,.legacy-page .research-grid article{border-top:1px solid var(--line);padding:22px 0;background:transparent}
+.legacy-page .engagements article .number{font:600 1.6rem 'Space Grotesk',sans-serif;color:var(--bronze-bright);margin-bottom:12px}
+.legacy-page .service-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:50px;align-items:start}
+.legacy-page .service-aside{padding:30px;background:var(--cream);border-left:2px solid var(--bronze-bright)}
+.legacy-page .expertise{background:var(--cream)}
+.legacy-page .service-faq{padding-block:55px}
+.legacy-page .service-faq details{border-top:1px solid var(--line);padding:13px 0}
+.legacy-page .service-faq summary{font-weight:600;cursor:pointer}
+.legacy-page .service-faq details p{max-width:800px}
+.legacy-page .perspective-body{max-width:820px;margin:auto;padding:65px 0}
+.legacy-page .perspective-body h2{margin:35px 0 18px}
+.legacy-page .perspective-body p{margin-top:18px}
+.legacy-page .perspective-hero .perspective-byline{color:var(--bronze)}
+.legacy-page .button,.legacy-page .nav-contact{background:var(--bronze-bright);color:#fff;border:0;display:inline-block;padding:14px 24px;text-decoration:none;font-weight:700;letter-spacing:.06em;font-size:.8rem;text-transform:uppercase}
+.legacy-page .text-link{color:var(--bronze);border-bottom:1px solid var(--bronze);font-weight:700}
+.legacy-page .related-services{display:flex;flex-wrap:wrap;gap:15px 26px;padding:28px 0;border-top:1px solid var(--line);font-size:.9rem}
+.legacy-page .related-services a{color:var(--bronze);text-decoration:underline}
+.legacy-page .legacy-note{border-left:3px solid var(--bronze-bright);background:var(--cream);padding:18px 24px;margin:0 auto 25px;font-size:.92rem}
+.legacy-page .legacy-note a{color:var(--bronze)}
+.legacy-page .footer{background:var(--green-deep);color:white}
+@media(max-width:900px){.legacy-page .engagements,.legacy-page .research-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.legacy-page .service-layout{grid-template-columns:1fr}.legacy-page .service-hero::before{right:-22%}}
+@media(max-width:700px){.legacy-page .section{padding:48px 0}.legacy-page .section.wrap{width:calc(100% - 36px)}.legacy-page .engagements,.legacy-page .research-grid{grid-template-columns:1fr}.legacy-page .service-hero,.legacy-page .perspective-hero{padding:52px 0 62px}.legacy-page .service-hero::before{right:-52%;top:-100px;width:100vw;height:100vw;opacity:.14}.legacy-page .service-hero::after{opacity:.15}.legacy-page .perspective-body{padding:45px 0}.legacy-page .related-services{display:block}.legacy-page .related-services a{display:inline-block;margin:7px 12px 7px 0}}
+
+/* Migrated contact and article elements retain original HubSpot embeds. */
+.legacy-page .contact{padding:70px 0;background:var(--green-deep);color:#fff}
+.legacy-page .contact h2,.legacy-page .contact .eyebrow{color:#fff}
+.legacy-page .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+.legacy-page .contact .email{display:block;margin-top:16px;color:#fff;font-weight:700}
+.legacy-page .contact .text-link{color:#fff;border-bottom-color:#fff}
+.legacy-page .contact-action{min-width:0}
+.legacy-page .contact-action>p{margin-top:18px}
+.legacy-page .consultation-form{padding:22px;background:var(--paper);color:var(--ink);min-height:350px;border-radius:2px}
+.legacy-page .consultation-form .hs-form-frame{min-height:300px}
+.legacy-page .perspective-body ul,.legacy-page .section ul{padding-left:24px}
+.legacy-page .perspective-body li,.legacy-page .section li{margin:.45em 0}
+.legacy-page .service-faq{width:calc(100% - 64px);max-width:var(--max);margin:auto}
+.legacy-page .service-layout .service-aside h3{font-size:1.5rem}
+.legacy-page .related-services{width:calc(100% - 64px);max-width:var(--max);margin:auto}
+@media(max-width:700px){.legacy-page .contact-grid{grid-template-columns:1fr;gap:24px}.legacy-page .service-faq,.legacy-page .related-services{width:calc(100% - 36px)}}
+
+/* Keep artwork in its own visual field rather than behind long titles. */
+@media(min-width:701px){
+.legacy-page .service-hero h1,.legacy-page .perspective-hero h1{max-width:56%}
+.legacy-page .service-hero .lede,.legacy-page .perspective-hero .lede{max-width:56%}
+.legacy-page .service-hero::before,.legacy-page .perspective-hero::before{right:-14%;opacity:.88}
+}
+@media(max-width:700px){
+.legacy-page .service-hero h1,.legacy-page .perspective-hero h1{max-width:100%}
+.legacy-page .service-hero .lede,.legacy-page .perspective-hero .lede{max-width:100%}
+}
