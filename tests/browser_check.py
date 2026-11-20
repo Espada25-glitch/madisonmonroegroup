@@ -4,7 +4,10 @@ from playwright.async_api import async_playwright
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 ROUTES=["/","/expertise/","/approach/","/about/","/insights/","/contact/",
 "/services/strategic-brand-positioning/","/services/business-growth-strategy/",
-"/services/ai-discoverability-innovation/","/services/customer-insights-analytics/"]
+"/services/ai-discoverability-innovation/","/services/customer-insights-analytics/",
+"/research/","/perspectives/how-to-choose-a-marketing-strategy-consultant/","/perspectives/when-execution-gets-cheaper-judgment-matters-more/",
+"/services/applied-research/","/services/commercial-performance/","/services/customer-market-strategy/",
+"/services/executive-advisory/","/services/growth-strategy/","/services/marketing-strategy/","/services/strategic-partnerships/"]
 PORT=8765
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
@@ -42,11 +45,11 @@ async def main():
       if dims["h1"]!=1 or dims["main"]!=1:problems.append("missing/duplicate landmarks")
       if "Space Grotesk" not in dims["font"] or "DM Sans" not in dims["bodyFont"]:problems.append("incorrect fonts: "+str(dims["font"])+" | "+str(dims["bodyFont"]))
       if not dims["hasGoogle"] or not dims["hasHubspot"]:problems.append("missing analytics script")
-      if route=="/contact/" and not dims["hasHubspotForm"]:problems.append("missing HubSpot form")
+      if (route=="/contact/" or route=="/research/" or route=="/services/marketing-strategy/") and not dims["hasHubspotForm"]:problems.append("missing HubSpot form")
       if errors:problems.append("page JS errors: "+str(errors[:2]))
       report.append({"width":width,"route":route,"status":"PASS" if not problems else "FAIL","dimensions":dims,"issues":problems})
       failures.extend(f"{width}px {route}: {p}" for p in problems)
-      if width in [375,1440] and route in ["/","/expertise/","/about/","/contact/"]:
+      if width in [375,1440] and route in ["/","/expertise/","/about/","/contact/","/research/","/services/marketing-strategy/","/perspectives/how-to-choose-a-marketing-strategy-consultant/"]:
        name=route.strip("/").replace("/","-") or "home"
        await page.screenshot(path=str(out/f"{name}-{width}.png"),full_page=True)
      if width==1440:
