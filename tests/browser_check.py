@@ -49,7 +49,7 @@ async def main():
       if errors:problems.append("page JS errors: "+str(errors[:2]))
       report.append({"width":width,"route":route,"status":"PASS" if not problems else "FAIL","dimensions":dims,"issues":problems})
       failures.extend(f"{width}px {route}: {p}" for p in problems)
-      if width in [375,1440] and route in ["/","/expertise/","/about/","/contact/","/research/","/services/marketing-strategy/","/perspectives/how-to-choose-a-marketing-strategy-consultant/"]:
+      if width in [375,1440]:
        name=route.strip("/").replace("/","-") or "home"
        await page.screenshot(path=str(out/f"{name}-{width}.png"),full_page=True)
      if width==1440:
